@@ -5,39 +5,61 @@
 # 4. Rearange CSS-File like specified
 # 5. Export new CSS-File
 
+
 def menu():
     print("\ncleCSS - CSS cleaning and organization tool")
-    print("Please choose your preferred language:\n\n\t1\tEnglish\n\t2\tDeutsch\n")
-    language = int(input("TYPE A NUMBER: "));
+    print("Please enter the path of your CSS file:")
+    file = input("Filepath: ")
 
-    if language == 1:
-        print("\nPlease choose a operation:\n\n\t1\tSplit CSS file into seperate files for each kind of selectors")
-        print("\t2\tSort CSS statements alphabetic")
-        print("\t3\tBundle corresponding statements")
-        print("\t4\tDelete false statements")
-        print("\t5\tDelete comments and annotations")
+    analyze(read(file))
 
-        chosen = int(input("\nTYPE A NUMBER: "))
 
-        print("\nYOUR CHOICE: " + chosen)
+def read(file):
+    filecontent = open(file).readlines()
+    print(filecontent)
+    return filecontent
 
-        return chosen
 
-    elif language == 2:
-        print("\nBitte wählen Sie eine der folgenden Operationen:\n\n\t1\tAufteilung des CSS-Dokuments in selektorspezifische Dateien")
-        print("\t2\tSortierung der CSS-Regeln nach dem Alphabet")
-        print("\t3\tZusammenfassung zugehöriger Regeln")
-        print("\t4\tEntfernen von falschen Regeln")
-        print("\t5\tEntfernen von Kommentaren und Anmerkungen")
+def analyze(content):
+    combicontent = " ".join(content)
+    combicontent = combicontent.replace("\n", " ")
+    combicontent = combicontent.replace("\t", " ")
+    combicontent = combicontent.replace("  ", " ")
+    combicontent = combicontent.replace("   ", " ")
+    print(combicontent)
+    elements = combicontent.split("}")
+    print(elements)
+    x = 0
+    elements2 = []
+    while x < len(elements):
 
-        chosen = int(input("\nBITTE GEBEN SIE EINE NUMMER EIN: "))
+        elements2.append(elements[x].lstrip() + " }")
+        x = x + 1
 
-        print("\nIHRE WAHL: " + chosen)
+    elements = elements2
+    print(elements)
 
-        return chosen
-    else:
-        print("SORRY, THIS INPUT IS NOT VALID! PLEASE RESTART THE PROGRAMM!")
+    distinguish_selectors(elements)
+
+
+def distinguish_selectors(content):
+    sel_id = []
+    sel_class = []
+    sel_element = []
+
+    for block in content:
+        blocklist = list(block)
+        if blocklist[0] == '#':
+            sel_id.append(block)
+            print("ID: \t\t" + block)
+        elif blocklist[0] == '.':
+            sel_class.append(block)
+            print("Class: \t\t" + block)
+        else:
+            sel_element.append(block)
+            print("Element: \t" + block)
 
 
 if __name__ == "__main__":
     menu()
+
