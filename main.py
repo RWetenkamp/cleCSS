@@ -59,6 +59,16 @@ def distinguish_selectors(content):
             sel_element.append(block)
             print("Element: \t" + block)
 
+    print("\n" + str(len(sel_id)) + " ID selectors, " + str(len(sel_class)) + " class selectors and " + str(len(sel_element)) + " element selectors.")
+
+    if (len(sel_id) * len(sel_class) * len(sel_element)) > 0:
+        do_seperation = input("\nDo you want to seperate each kind of selectors in specific CSS files? (Y/N) --> ")
+
+        if (do_seperation == 'Y'):
+            print("\tY - You will get 3 CSS files in result")
+        else:
+            print("\tN - No changes")
+
 
 if __name__ == "__main__":
     menu()
