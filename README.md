@@ -7,3 +7,5 @@ Up to now I've implemented the following features:
 - alphabetic sorting
 
 What are your ideas? What functions would be cool? I'm very interested in your ideas!
+
++++ PLEASE NOTE: I'm far away from releasing! Opening issues is definitely to early! +++
